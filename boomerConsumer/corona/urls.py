@@ -8,10 +8,8 @@ urlpatterns = [
     path('index/show_requests', nonboomer_view.show_requests, name='show_requests'),
     path('listings', boomer_view.listing, name='listing'),
     path('listings/take/<str:id>', boomer_view.requestTake, name='requestTake'),
-
     path('signupBoomer', index_view.signupB, name='boomerSignup'),
-    path('signupZoomer', index_view.signupZ, name='zoomerSignup')
-
+    path('signupZoomer', index_view.signupZ, name='zoomerSignup'),
     path('index/show_requests/complete/<str:id>', nonboomer_view.requestComplete, name='requestComplete'),
-
+    path('index/myrequests', nonboomer_view.show_requests, name='myrequests'),
 ]
