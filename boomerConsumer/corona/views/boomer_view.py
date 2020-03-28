@@ -26,8 +26,8 @@ def listing(request):
     context = {
         'boomer_list': myboomer_list,
     }
-    request.session['username'] = 'gay'
-    request.session['type'] = 'boomer'
+    request.session['username'] = 'mzhang'
+    request.session['type'] = 'zoomer'
     return render(request, 'nonboomer/listing.html', context)
 
 def requestTake(request, id):
