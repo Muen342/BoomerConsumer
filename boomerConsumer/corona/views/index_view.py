@@ -8,6 +8,9 @@ from django.db import connection
 import datetime
 
 def index(request):
+    #for now
+    request.session['username'] = 'mzhang'
+    request.session['type'] = 'zoomer'
     return render(request, 'homepage/index.html',{})
 
 def login(request):
@@ -18,3 +21,9 @@ def signupB(request):
 
 def signupZ(request):
     return render(request, 'login/zoomer_signup.html',{})
+
+def boomerIndex(request):
+    # for now
+    request.session['username'] = 'gays'
+    request.session['type'] = 'boomer'
+    return render(request, 'homepage/boomerIndex.html',{})

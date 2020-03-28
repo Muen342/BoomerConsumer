@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+{% block content %}
+<div class="main">
+    <h2>Request</h2>
+    <form action="{% url 'corona:addListing' %}" method="post">
+        {% csrf_token %}
+        <label for="details">Detail:</label><br>
+        <input type="text" id="details" name="details" value=""><br>
+        <input type="submit" value="Submit">
+    </form>
+    {% if error_message %}
+    <p>{{error_message}}</p>
+    {% endif %}
+    <br>
+</div>
+{% endblock %}
