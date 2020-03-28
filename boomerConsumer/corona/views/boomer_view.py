@@ -26,7 +26,9 @@ def listing(request):
     context = {
         'boomer_list': myboomer_list,
     }
-    return render(request, 'boomer/listing.html', context)
+    request.session['username'] = 'mzhang'
+    request.session['type'] = 'zoomer'
+    return render(request, 'nonboomer/listing.html', context)
 
 def requestTake(request, id):
     request1 = Requests.objects.filter(id=id).first()
@@ -42,4 +44,4 @@ def requestTake(request, id):
     context = {
         'boomer_list': myboomer_list,
     }
-    return render(request, 'boomer/listing.html', context)
+    return render(request, 'nonboomer/listing.html', context)
