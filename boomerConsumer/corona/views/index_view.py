@@ -12,3 +12,6 @@ def index(request):
 
 def login(request):
     return render(request, 'login/index.html',{})
+
+def signup(request):
+    return render(request, 'login/boomer_signup',{})
