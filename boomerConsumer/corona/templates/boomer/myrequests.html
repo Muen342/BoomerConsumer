@@ -1,0 +1,30 @@
+<html>
+
+<body>
+    {% if request_list %}
+    {% for request1 in request_list %}
+    <p>
+        {% if request1.taken == True %}
+        Helper details:<br>
+        Name: {{request1.zoomer.name}} <br>
+        Surname: {{request1.zoomer.surname}}<br>
+        Age: {{request1.zoomer.age}} <br>
+        Postal Code: {{request1.zoomer.postal_code}}<br>
+        Email: {{request1.zoomer.email}}<br>
+        {%else%}
+        Not taken yet<br>
+        {%endif%}
+        Request: {{request1.details}}<br> 
+        Completed: {{request1.completed}}
+        
+        <a href="{% url 'corona:requestComplete' request1.id %}">Complete</a>
+        <hr>
+        
+    </p>
+    {% endfor %}   
+    {% else %}
+    <p>No Requests</p>
+    {% endif %}
+</body>
+
+</html>

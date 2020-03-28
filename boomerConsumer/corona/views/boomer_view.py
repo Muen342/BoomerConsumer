@@ -26,22 +26,14 @@ def listing(request):
     context = {
         'boomer_list': myboomer_list,
     }
-    request.session['username'] = 'mzhang'
-    request.session['type'] = 'zoomer'
+    request.session['username'] = 'gay'
+    request.session['type'] = 'boomer'
     return render(request, 'nonboomer/listing.html', context)
 
 def requestTake(request, id):
     request1 = Requests.objects.filter(id=id).first()
     request1.taken = True
+    request1.zoomer_id='mzhang'
     request1.save()
     #save the zoomer that took it too, but we need the zoomer id in session storage to access (get during login)
-    boomer_list = Boomer.objects.all()
-    myboomer_list = []
-    for boomer in boomer_list:
-        request_list = Requests.objects.filter(boomer_id=boomer.username)
-        newBoomer = {'name':boomer.name, 'surname':boomer.surname, 'age':boomer.age, 'postal_code':boomer.postal_code, 'request_list': request_list}
-        myboomer_list.append(newBoomer)
-    context = {
-        'boomer_list': myboomer_list,
-    }
-    return render(request, 'nonboomer/listing.html', context)
+    return listing(request)

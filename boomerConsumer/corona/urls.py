@@ -9,4 +9,5 @@ urlpatterns = [
     path('listings', boomer_view.listing, name='listing'),
     path('listings/take/<str:id>', boomer_view.requestTake, name='requestTake'),
     path('index/show_requests/complete/<str:id>', nonboomer_view.requestComplete, name='requestComplete'),
+    path('index/myrequests', nonboomer_view.show_requests, name='myrequests'),
 ]
