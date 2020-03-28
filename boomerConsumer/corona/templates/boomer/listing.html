@@ -1,0 +1,25 @@
+<html>
+
+<body>
+    {% extends "main/base.html" %}
+    {% block title %} Listing {% endblock %}
+    {% block content %}
+    <div class="main">
+        {% if boomer_list %}
+        {% for boomer in boomer_list %}
+        <p>
+            Name: {{boomer.name}} <br>
+            Surname: {{boomer.surname}}<br>
+            Age: {{boomer.age}} <br>
+            Postal Code : {{boomer.postal_code}}<br>
+            Requests: {{boomer.requests}} <br>
+        </p>
+        {% endfor %}   
+        {% else %}
+        <p>no boomers</p>
+        {% endif %}
+    </div>
+    {% endblock %}
+</body>
+
+</html>
