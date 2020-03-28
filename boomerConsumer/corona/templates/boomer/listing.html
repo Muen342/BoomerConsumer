@@ -12,7 +12,11 @@
             Surname: {{boomer.surname}}<br>
             Age: {{boomer.age}} <br>
             Postal Code : {{boomer.postal_code}}<br>
-            Requests: {{boomer.requests}} <br>
+            Requests:  {{boomer.requests}}<br>
+            <!-- {% for request in boomer.request_list %}
+            Request: {{request.details}}
+            Completed: {{request.completed}}
+            {%endfor%} -->
         </p>
         {% endfor %}   
         {% else %}
