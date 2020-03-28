@@ -14,8 +14,9 @@
             Postal Code : {{boomer.postal_code}}<br>
             Requests:  <br>
             {% for request in boomer.request_list %}
-            Request: {{request.details}}<br>
-            Completed: {{request.completed}}
+            {%if request.taken == False%}
+            Request: {{request.details}} (add href here to let zoomer take it)<br>
+            {%endif%}
             {%endfor%}
             <hr>
         </p>

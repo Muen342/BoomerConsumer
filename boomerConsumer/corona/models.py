@@ -22,7 +22,7 @@ class Zoomer(models.Model):
 
 class Requests(models.Model):
     boomer_id = models.ForeignKey(Boomer, on_delete=models.CASCADE)
-    zoomer_id = models.CharField(max_length=100, default='')
+    zoomer_id = models.CharField(max_length=100, default='', blank=True)
     details = models.TextField(max_length=100)
     completed = models.BooleanField(default=False)
     taken = models.BooleanField(default=False)
