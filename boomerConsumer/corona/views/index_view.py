@@ -25,13 +25,24 @@ def signupB(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             loginDjango(request, user)
-            return redirect('home')
+            return redirect('homepage/index2') # CHANGE OT WHATEVER NEEDED
     else:
         form = UserCreationForm()
     return render(request, 'login/boomer_signup.html',{'form': form})
 
 def signupZ(request):
-    return render(request, 'login/zoomer_signup.html',{})
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            loginDjango(request, user)
+            return redirect('homepage/index2') # CHANGE TO WHATEVER THING NEEDED
+    else:
+        form = UserCreationForm()
+    return render(request, 'login/zoomer_signup.html',{'form': form})
 
 
 
