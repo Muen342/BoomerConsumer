@@ -26,13 +26,32 @@
 <body id="page-top">
     <section class="page-section" id="intro">
         <div class="container">
-            <h1>Sign up Boomer form here</h1>
+            <center><h1>Sign up Boomer form here</h1></center>
             <h3>Already registered Boomer or Zoomer?<a href="/corona"> Login here </a> </h3>
             
         </div>
     </section>
 
     <section class="page-section" id="Signup form">
-
+        {% block content %}
+          <center><h2>Enter details here</h2>
+          <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+              <p>
+                {{ field.label_tag }}<br>
+                {{ field }}
+                {% if field.help_text %}
+                  <small style="color: grey">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                  <p style="color: red">{{ error }}</p>
+                {% endfor %}
+              </p>
+            {% endfor %}
+            <button type="submit">Sign up</button>
+          </form>
+        {% endblock %}
+        </center>
     </section>
 </body>
