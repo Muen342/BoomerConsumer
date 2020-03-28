@@ -26,15 +26,23 @@ def listing(request):
     context = {
         'boomer_list': myboomer_list,
     }
-    request.session['username'] = 'mzhang'
-    request.session['type'] = 'zoomer'
     return render(request, 'nonboomer/listing.html', context)
 
 def requestTake(request, id):
     request1 = Requests.objects.filter(id=id).first()
     request1.zoomer_id = 'mzhang'
     request1.taken = True
-    request1.zoomer_id='mzhang'
     request1.save()
     #save the zoomer that took it too, but we need the zoomer id in session storage to access (get during login)
     return listing(request)
+
+def add(request):
+    return render(request, 'boomer/add.html', {})
+
+def addListing(request):
+    if(request.POST['details'] == ''):
+        return render(request, 'boomer/add.html', {'error_message': 'Enter some details'})
+    else:
+        r = Requests(boomer_id=Boomer.objects.get(pk=request.session['username']), details=request.POST['details'])
+        r.save()
+        return render(request, 'boomer/add.html', {'error_message': 'Successfully added'})

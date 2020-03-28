@@ -10,6 +10,10 @@ class Boomer(models.Model):
     age = models.IntegerField()
     email = models.CharField(max_length=200)
     postal_code = models.CharField(max_length=6)
+    latitude = models.FloatField(default=0)
+    longitude = models.FloatField(default=0)
+    phone = models.CharField(max_length=11,default='')
+
 
 class Zoomer(models.Model):
     username = models.CharField(primary_key=True, max_length=50)
@@ -19,6 +23,9 @@ class Zoomer(models.Model):
     email = models.CharField(max_length=200)
     age = models.IntegerField()
     postal_code = models.CharField(max_length=6)
+    latitude = models.FloatField(default=0)
+    longitude = models.FloatField(default=0)
+    phone = models.CharField(max_length=11,default='')
 
 class Requests(models.Model):
     boomer_id = models.ForeignKey(Boomer, on_delete=models.CASCADE)

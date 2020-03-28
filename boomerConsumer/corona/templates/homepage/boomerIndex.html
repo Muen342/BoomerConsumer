@@ -1,0 +1,13 @@
+<html>
+
+<body>
+    {% extends "main/baseboomer.html" %}
+    {% block title %} Home {% endblock %}
+    {% block content %}
+    <div class="main">
+        <a href="{% url 'corona:myrequests' %}">My requests</a>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

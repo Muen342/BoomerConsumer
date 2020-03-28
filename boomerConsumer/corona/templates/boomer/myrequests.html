@@ -1,9 +1,15 @@
 <html>
 
 <body>
+    {% extends "main/baseboomer.html" %}
+    {% block title %} Requests {% endblock %}
+    {% block content %}
+    <div class="main">
     {% if request_list %}
     {% for request1 in request_list %}
     <p>
+        Request: {{request1.details}}<br> 
+        Completed: {{request1.completed}}<br><br>
         {% if request1.taken == True %}
         Helper details:<br>
         Name: {{request1.zoomer.name}} <br>
@@ -14,10 +20,6 @@
         {%else%}
         Not taken yet<br>
         {%endif%}
-        Request: {{request1.details}}<br> 
-        Completed: {{request1.completed}}
-        
-        <a href="{% url 'corona:requestComplete' request1.id %}">Complete</a>
         <hr>
         
     </p>
@@ -25,6 +27,8 @@
     {% else %}
     <p>No Requests</p>
     {% endif %}
+    </div>
+    {% endblock %}
 </body>
 
 </html>
