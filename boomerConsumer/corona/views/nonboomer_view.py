@@ -18,13 +18,16 @@ def show_requests(request):
     elif(request.session['type'] == 'boomer'):
         request_list=Requests.objects.filter(boomer_id=request.session['username'])
         myrequest_list = []
-        for request in request_list:
-            zoomer = Zoomer.objects.get(pk=request.zoomer_id)
-            myrequest_list.append({'id':request.id, 'boomer_id': request.boomer_id, 'zoomer_id':request.zoomer_id, 'details':request.details,'completed':request.completed,'taken':request.taken,'zoomer':zoomer})
+        for request1 in request_list:
+            if(request1.zoomer_id == ''):
+                myrequest_list.append({'id':request1.id, 'boomer_id': request1.boomer_id, 'zoomer_id':request1.zoomer_id, 'details':request1.details,'completed':request1.completed,'taken':request1.taken,'zoomer':''})
+            else:
+                zoomer = Zoomer.objects.get(pk=request1.zoomer_id)
+                myrequest_list.append({'id':request1.id, 'boomer_id': request1.boomer_id, 'zoomer_id':request1.zoomer_id, 'details':request1.details,'completed':request1.completed,'taken':request1.taken,'zoomer':zoomer})
         context = {
             'request_list':myrequest_list,
         }
-        return render(request, 'nonboomer/myrequests.html', context)
+        return render(request, 'boomer/myrequests.html', context)
     return render(request, 'login/index.html', {})
 
 def requestComplete(request, id):
