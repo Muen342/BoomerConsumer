@@ -6,4 +6,5 @@ urlpatterns = [
     path('', index_view.login, name='login'),
     path('index', index_view.index, name='index'),
     path('listings', boomer_view.listing, name='listing'),
+    path('listings/take/<str:id>', boomer_view.requestTake, name='requestTake'),
 ]
