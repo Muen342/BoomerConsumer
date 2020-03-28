@@ -7,4 +7,6 @@ urlpatterns = [
     path('index', index_view.index, name='index'),
     path('listings', boomer_view.listing, name='listing'),
     path('listings/take/<str:id>', boomer_view.requestTake, name='requestTake'),
+    path('signupBoomer', index_view.signupB, name='boomerSignup'),
+    path('signupZoomer', index_view.signupZ, name='zoomerSignup')
 ]
