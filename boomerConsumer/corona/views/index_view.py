@@ -9,3 +9,6 @@ import datetime
 
 def index(request):
     return render(request, 'homepage/index.html',{})
+
+def login(request):
+    return render(request, 'login/index.html',{})
