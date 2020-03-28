@@ -11,6 +11,9 @@ from django.contrib.auth import login as loginDjango
 import datetime
 
 def index(request):
+    #for now
+    request.session['username'] = 'mzhang'
+    request.session['type'] = 'zoomer'
     return render(request, 'homepage/index.html',{})
 
 def login(request):
@@ -51,3 +54,8 @@ def signupZ(request):
     # def signup(request):
     
     # return render(request, 'signup.html', {'form': form})
+def boomerIndex(request):
+    # for now
+    request.session['username'] = 'gays'
+    request.session['type'] = 'boomer'
+    return render(request, 'homepage/boomerIndex.html',{})
