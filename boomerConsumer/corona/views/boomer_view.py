@@ -32,6 +32,7 @@ def listing(request):
 
 def requestTake(request, id):
     request1 = Requests.objects.filter(id=id).first()
+    request1.zoomer_id = 'mzhang'
     request1.taken = True
     request1.zoomer_id='mzhang'
     request1.save()
