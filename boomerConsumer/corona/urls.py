@@ -1,5 +1,6 @@
 from .views import index_view, boomer_view, nonboomer_view
 from django.urls import path
+from django.conf.urls import url
 
 app_name = 'corona'
 urlpatterns = [
@@ -12,4 +13,6 @@ urlpatterns = [
     path('signupZoomer', index_view.signupZ, name='zoomerSignup'),
     path('index/show_requests/complete/<str:id>', nonboomer_view.requestComplete, name='requestComplete'),
     path('index/myrequests', nonboomer_view.show_requests, name='myrequests'),
+
 ]
+
