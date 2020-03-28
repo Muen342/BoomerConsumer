@@ -1,0 +1,31 @@
+<html>
+
+<body>
+    {% extends "main/base.html" %}
+    {% block title %} Listing {% endblock %}
+    {% block content %}
+    <div class="main">
+        {% if boomer_list %}
+        {% for boomer in boomer_list %}
+        <p>
+            Name: {{boomer.name}} <br>
+            Surname: {{boomer.surname}}<br>
+            Age: {{boomer.age}} <br>
+            Postal Code : {{boomer.postal_code}}<br>
+            Requests:  <br>
+            {% for request in boomer.request_list %}
+            {%if request.taken == False%}
+            Request: {{request.details}} <a href="{% url 'corona:requestTake' request.id %}">Take</a><br>
+            {%endif%}
+            {%endfor%}
+            <hr>
+        </p>
+        {% endfor %}   
+        {% else %}
+        <p>no boomers</p>
+        {% endif %}
+    </div>
+    {% endblock %}
+</body>
+
+</html>

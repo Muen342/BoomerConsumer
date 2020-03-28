@@ -1,0 +1,30 @@
+<html>
+
+<body>
+    {% extends "main/base.html" %}
+    {% block title %} Requests {% endblock %}
+    {% block content %}
+    <div class="main">
+        {% if request_list %}
+        {% for request1 in request_list %}
+        <p>
+            {% if request1.completed == False %}
+            Name: {{request1.boomer_id.name}} <br>
+            Surname: {{request1.boomer_id.surname}}<br>
+            Age: {{request1.boomer_id.age}} <br>
+            Postal Code: {{request1.boomer_id.postal_code}}<br>
+            Email: {{request1.boomer_id.email}}<br>
+            Request: {{request1.details}}<br> 
+            <a href="{% url 'corona:requestComplete' request1.id %}">Complete</a>
+            <hr>
+            {%endif%}
+        </p>
+        {% endfor %}   
+        {% else %}
+        <p>No Requests</p>
+        {% endif %}
+    </div>
+    {% endblock %}
+</body>
+
+</html>
