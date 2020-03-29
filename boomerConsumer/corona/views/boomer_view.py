@@ -3,7 +3,7 @@ from django.template import loader, RequestContext
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from ..models import Boomer, Requests
+from ..models import Boomer, Requests, Zoomer
 from django.views import generic
 from django.db import connection
 import datetime
@@ -76,11 +76,11 @@ def parsePostal(postalCode):
     data = response.json()
     data = json.dumps(data)
     #print(data)
-    latitude = data.split('longt')[1].split('": "')[1].split('",')[0]
-    longitude = data.split('latt')[1].split('": "')[1].split('"}')[0]
+    longitude = data.split('longt')[1].split('": "')[1].split('",')[0]
+    latitude = data.split('latt')[1].split('": "')[1].split('"}')[0]
     #print('latitude: ' + latitude)
     #print('longitude: ' + longitude)
-    return [float(latitude), float(longitude)]
+    return float(latitude), float(longitude)
 def simple_get(url):
     """
     Attempts to get the content at `url` by making an HTTP GET request.
@@ -209,8 +209,14 @@ def dictfetchall(cursor):
     ]
 
 def listing(request):
+    mylat, mylong = parsePostal(Zoomer.objects.get(pk=request.session['username']).postal_code)
     boomer_list = Boomer.objects.all()
     myboomer_list = []
+    for boomer in boomer_list:
+        request_list = Requests.objects.filter(boomer_id=boomer.username)
+        boomer.distance=getDistFromLatLon(mylat,mylong,boomer.latitude,boomer.longitude)
+        boomer.save()
+    boomer_list = Boomer.objects.order_by('distance')
     for boomer in boomer_list:
         request_list = Requests.objects.filter(boomer_id=boomer.username)
         reqcount = request_list.count()
@@ -221,7 +227,7 @@ def listing(request):
         if(reqcount == taken):
             myboomer_list.append(boomer)
         else:
-            newBoomer = {'name':boomer.name, 'surname':boomer.surname, 'age':boomer.age, 'postal_code':boomer.postal_code, 'email':boomer.email, 'phone': boomer.phone, 'address':boomer.address, 'request_list': request_list}
+            newBoomer = {'name':boomer.name, 'surname':boomer.surname, 'age':boomer.age, 'postal_code':boomer.postal_code, 'email':boomer.email, 'phone': boomer.phone, 'address':boomer.address, 'distance':boomer.distance, 'request_list': request_list}
             myboomer_list.append(newBoomer)
     context = {
         'boomer_list': myboomer_list,
@@ -281,6 +287,7 @@ def accounts(request):
     return render(request, 'boomer/editAccount.html', context)
 
 def editBoomerConfirm(request):
+    lat,longi  = parsePostal(request.POST['postalcode'])
     boomer = Boomer.objects.get(pk=request.session['username'])
     boomer.username=request.POST['username']
     boomer.password=request.POST['password']
@@ -291,6 +298,8 @@ def editBoomerConfirm(request):
     boomer.address=request.POST['address']
     boomer.age=request.POST['age']
     boomer.phone=request.POST['phone']
+    boomer.latitude=lat
+    boomer.longitude=longi
     boomer.save()
     context = {
         'boomer': boomer,

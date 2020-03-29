@@ -19,12 +19,7 @@ class Boomer(models.Model):
     longitude = models.FloatField(default=0)
     phone = models.CharField(max_length=11,default='')
     address = models.CharField(max_length=100,default='')
-
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Boomer.objects.create(user=instance)
-    instance.profile.save()
+    distance = models.FloatField(default=0)
 
 class Zoomer(models.Model):
     username = models.CharField(primary_key=True, max_length=50)
@@ -38,6 +33,7 @@ class Zoomer(models.Model):
     longitude = models.FloatField(default=0)
     phone = models.CharField(max_length=11,default='')
     address = models.CharField(max_length=100,default='')
+    distance = models.FloatField(default=0)
 
 class Requests(models.Model):
     boomer_id = models.ForeignKey(Boomer, on_delete=models.CASCADE)
