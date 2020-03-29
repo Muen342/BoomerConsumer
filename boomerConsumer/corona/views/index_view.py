@@ -103,7 +103,7 @@ def boomerIndex(request):
 
 def signupZoomerConfirm(request):
     lat,longi  = parsePostal(request.POST['postalcode'])
-    newZoomer= Boomer(username= request.POST['username'], password=request.POST['password'], name=request.POST['name'], surname=request.POST['surname'],age=request.POST['age'],email=request.POST['email'], postal_code=request.POST['postalcode'],phone=request.POST['phone'],address=request.POST['address'],latitude=lat,longitude=longi)
+    newZoomer= Zoomer(username= request.POST['username'], password=request.POST['password'], name=request.POST['name'], surname=request.POST['surname'],age=request.POST['age'],email=request.POST['email'], postal_code=request.POST['postalcode'],phone=request.POST['phone'],address=request.POST['address'],latitude=lat,longitude=longi)
     newZoomer.save()
     request.session['username'] = request.POST['username']
     request.session['type'] = 'zoomer'
