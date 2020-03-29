@@ -56,7 +56,7 @@ def testFunc():
 def parsePostal(postalCode):
     time.sleep(2)
     print(postalCode) 
-    url = "https://geocoder.ca/?locate=" + postalCode.lower().replace(" ", "") + "&geoit=XML&json=1"
+    url = r"https://geocoder.ca/?locate=" + postalCode.lower().replace(" ", "") + r"&geoit=XML&json=1"
     
     try:
         response = requests.get(url)
