@@ -8,6 +8,7 @@
         {% if boomer_list %}
         {% for boomer in boomer_list %}
         <p>
+            {%if boomer.request_list%}
             Name: {{boomer.name}} <br>
             Surname: {{boomer.surname}}<br>
             Age: {{boomer.age}} <br>
@@ -22,6 +23,7 @@
             {%endif%}
             {%endfor%}
             <hr>
+            {%endif%}
         </p>
         {% endfor %}   
         {% else %}

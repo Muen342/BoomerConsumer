@@ -10,9 +10,10 @@ from django.contrib.auth import authenticate
 from corona.forms import*
 from django.contrib.auth import login as loginDjango
 import datetime
+from .nonboomer_view import show_requests
 
 def index(request):
-    return render(request, 'homepage/index.html',{})
+    return show_requests(request)
 
 def login(request):
     return render(request, 'login/index.html',{})
@@ -52,7 +53,7 @@ def signupZ(request):
     
     # return render(request, 'signup.html', {'form': form})
 def boomerIndex(request):
-    return render(request, 'homepage/boomerIndex.html',{})
+    return show_requests(request)
 
 def signupZoomerConfirm(request):
     #find latitude and longitude using jacobs function
@@ -82,3 +83,7 @@ def loginSubmit(request):
                 return render(request, 'login/index.html',{'error_message':'Wrong password'})
         except:
             return render(request, 'login/index.html',{'error_message':'User not registered. Sign up first'})
+def logout(request):
+    del request.session['username']
+    del request.session['type']
+    return login(request)
