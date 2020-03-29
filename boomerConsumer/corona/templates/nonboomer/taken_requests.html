@@ -12,8 +12,10 @@
             Name: {{request1.boomer_id.name}} <br>
             Surname: {{request1.boomer_id.surname}}<br>
             Age: {{request1.boomer_id.age}} <br>
+            Address: {{request1.boomer_id.address}}<br>
             Postal Code: {{request1.boomer_id.postal_code}}<br>
             Email: {{request1.boomer_id.email}}<br>
+            Phone: {{request1.boomer_id.phone}}<br>
             Request: {{request1.details}}<br> 
             <a href="{% url 'corona:requestComplete' request1.id %}">Complete</a>
             <hr>

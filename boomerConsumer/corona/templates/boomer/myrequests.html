@@ -9,17 +9,27 @@
     {% for request1 in request_list %}
     <p>
         Request: {{request1.details}}<br> 
-        Completed: {{request1.completed}}<br><br>
+        {%if request1.completed == False%}
+        In Progress...<br><br>
+        {%else%}
+        The request has been fulfilled<br><br>
+        {%endif%}
         {% if request1.taken == True %}
         Helper details:<br>
         Name: {{request1.zoomer.name}} <br>
         Surname: {{request1.zoomer.surname}}<br>
         Age: {{request1.zoomer.age}} <br>
+        Address: {{request1.zoomer.address}}<br>
         Postal Code: {{request1.zoomer.postal_code}}<br>
         Email: {{request1.zoomer.email}}<br>
+        Phone: {{request1.zoomer.phone}}<br>
         {%else%}
         Not taken yet<br>
         {%endif%}
+        {%if request1.completed == False%}
+        <a href="{% url 'corona:editListing' request1.id %}">Edit request</a><br>
+        {%endif%}
+        <a href="{% url 'corona:deleteListing' request1.id %}">Delete request</a><br>
         <hr>
         
     </p>

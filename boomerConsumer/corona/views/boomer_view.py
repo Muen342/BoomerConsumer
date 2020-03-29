@@ -7,6 +7,7 @@ from ..models import Boomer, Requests
 from django.views import generic
 from django.db import connection
 import datetime
+from .nonboomer_view import show_requests
 
 def dictfetchall(cursor):
     "Return all rows from a cursor as a dict"
@@ -21,7 +22,7 @@ def listing(request):
     myboomer_list = []
     for boomer in boomer_list:
         request_list = Requests.objects.filter(boomer_id=boomer.username)
-        newBoomer = {'name':boomer.name, 'surname':boomer.surname, 'age':boomer.age, 'postal_code':boomer.postal_code, 'request_list': request_list}
+        newBoomer = {'name':boomer.name, 'surname':boomer.surname, 'age':boomer.age, 'postal_code':boomer.postal_code, 'email':boomer.email, 'phone': boomer.phone, 'address':boomer.address, 'request_list': request_list}
         myboomer_list.append(newBoomer)
     context = {
         'boomer_list': myboomer_list,
@@ -46,3 +47,29 @@ def addListing(request):
         r = Requests(boomer_id=Boomer.objects.get(pk=request.session['username']), details=request.POST['details'])
         r.save()
         return render(request, 'boomer/add.html', {'error_message': 'Successfully added'})
+
+
+
+def editListing(request, id):
+    request1 = Requests.objects.get(pk=id)
+    context = {
+        'request1': request1
+    }
+    return render(request, 'boomer/editRequest.html', context)
+
+def confirmEditListing(request, id):
+    request1 = Requests.objects.get(pk=id)
+    if(request.POST['details'] == ''):
+        return render(request, 'boomer/editRequest.html', {'request1': request1,'error_message':'Enter the details of the request'})
+    request1.details = request.POST['details']
+    request1.save()
+    context = {
+        'request1': request1,
+        'error_message':'Successfully edited',
+    }
+    return render(request, 'boomer/editRequest.html', context)
+
+def deleteListing(request, id):
+    request1 = Requests.objects.get(pk=id)
+    request1.delete()
+    return show_requests(request)
