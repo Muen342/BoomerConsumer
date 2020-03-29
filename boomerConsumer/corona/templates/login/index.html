@@ -27,6 +27,17 @@
     <section class="page-section" id="intro">
         <div class="container">
             <h1>Login form here</h1>
+            <form action="{% url 'corona:loginSubmit' %}" method="post">
+            {% csrf_token %}
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" value=""><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" value=""><br>
+            <input type="submit" value="Submit">
+            </form>
+            {% if error_message %}
+            <p>{{error_message}}</p>
+            {% endif %}
             <h3>Not a registered Boomer or Zoomer? Signup <a href="#Signup link">below!</a> </h3>
             
         </div>
