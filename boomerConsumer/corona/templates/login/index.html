@@ -126,6 +126,17 @@
         font-size: 18px;
     }
 
+    .page-section, .btn{        
+        border-radius: 3px;
+    }
+
+    .quote-section pre{
+        color: #fff;
+        background: rgba(0,0,0,0.5);
+        /*background: radial-gradient(circle, rgba(234,191,179,1) 0%, rgba(233,128,116,1) 6%, rgba(234,231,220,1) 98%);*/
+        font-family: Garamond, serif;
+        font-size: 50px;
+    }
 
 </style>
     <!-- Custom styles for this template -->
@@ -154,16 +165,40 @@
             {% endif %}
 
             </form>
-            <h3>Not a registered Boomer or Zoomer? Signup <a href="#Signup link">below!</a> </h3>
-            
+
+            <center>
+            <h4 style="color: green">Not a registered Boomer or Zoomer? Sign-up below! </h4>
+            </center>
 
     </section>
 
     <section class="page-section" id="Signup link">
-        <div class="container">
-            <button onclick="window.location.href = 'signupBoomer';">Boomer: need help</button>
-            <button onclick="window.location.href = 'signupZoomer';">Zoomer: help the boomer consumer</button>
+        <div class="container" style="color: green;">
+            <center>
+            <button onclick="window.location.href = 'signupBoomer';">Boomer: receive help from people near you!</button>
+            <button onclick="window.location.href = 'signupZoomer';">Zoomer: help the boomer as a proxy consumer</button>
+            </center>       
         </div>
+        <br>
     </section>
+
+
+    <section class="quote-section" id="quote">
+       
+                            <pre>
+                                     <q>Help others when you can,
+                                                 Stay at home when you can't.</q> 
+                                                                             ~ A Zoomer 2020</pre>
+
+      
+    </section>
+<!-- <footer class="site-footer">
+  <div id="footer-content">
+    <center>
+    <br><p style="color: #fff; font-size: 20px"> Help Others When You Can, <br><br> Stay at Home When You Can't<br><br>
+     </center>
+  </div>
+</footer> -->
+
 
 </body>
