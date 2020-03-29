@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -14,6 +17,11 @@ class Boomer(models.Model):
     longitude = models.FloatField(default=0)
     phone = models.CharField(max_length=11,default='')
 
+@receiver(post_save, sender=User)
+def update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Boomer.objects.create(user=instance)
+    instance.profile.save()
 
 class Zoomer(models.Model):
     username = models.CharField(primary_key=True, max_length=50)
@@ -33,3 +41,4 @@ class Requests(models.Model):
     details = models.TextField(max_length=100)
     completed = models.BooleanField(default=False)
     taken = models.BooleanField(default=False)
+

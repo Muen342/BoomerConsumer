@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.views import generic
 from django.db import connection
 from django.contrib.auth import authenticate
-from django.contrib.auth.forms import UserCreationForm
+from corona.forms import*
 from django.contrib.auth import login as loginDjango
 import datetime
 
@@ -21,21 +21,31 @@ def login(request):
 
 def signupB(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
+            Boomer = form.save()
+            Boomer.refresh_from_db()
+            Boomer.profile.displayName = form.cleaned_data.get('displayName')
+            Boomer.save()
+            Boomer.profile.lastName = form.cleaned_data.get('lastName')
+            Boomer.save()
+            Boomer.profile.age = form.cleaned_data.get('age')
+            Boomer.save()
+            Boomer.profile.email = form.cleaned_data.get('postalCode')
+            Boomer.save()
+            Boomer.profile.phome = form.cleaned_data.get('phoneNumber')
+            Boomer.save()
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            loginDjango(request, user)
-            return redirect('homepage/index2') # CHANGE OT WHATEVER NEEDED
+            Boomer = authenticate(username=Boomer.username, password=raw_password)
+            login(request, Boomer)
+            return redirect('index')
     else:
-        form = UserCreationForm()
+        form = SignUpForm()
     return render(request, 'login/boomer_signup.html',{'form': form})
 
 def signupZ(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
