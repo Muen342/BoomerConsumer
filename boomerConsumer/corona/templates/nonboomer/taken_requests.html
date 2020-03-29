@@ -1,12 +1,18 @@
 <html>
 
-<body>
+<body style="background: rgb(232,90,79);
+background: linear-gradient(229deg, rgba(232,90,79,1) 24%, rgba(220,20,60,1) 60%, rgba(234,231,220,1) 98%);">
     {% extends "main/base.html" %}
     {% block title %} Requests {% endblock %}
     {% block content %}
-    <div class="main">
+    <br>
+    <br>
+    <section class="page-section" >
+    
         {% if request_list %}
         {% for request1 in request_list %}
+        <div class="itemsInList">
+            
         <p>
             {% if request1.completed == False %}
             Name: {{request1.boomer_id.name}} <br>
