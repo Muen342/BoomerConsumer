@@ -18,6 +18,7 @@ urlpatterns = [
     path('listings/take/<str:id>', boomer_view.requestTake, name='requestTake'),
     path('signupBoomer', index_view.signupB, name='boomerSignup'),
     path('signupZoomer', index_view.signupZ, name='zoomerSignup'),
+    path('signupBoomerConfirm', index_view.signupBoomerConfirm, name='signupBoomerConfirm'),
     path('signupZoomerConfirm', index_view.signupZoomerConfirm, name='signupZoomerConfirm'),
     path('index/show_requests/complete/<str:id>', nonboomer_view.requestComplete, name='requestComplete'),
     path('index2/myrequests', nonboomer_view.show_requests, name='myrequests'),

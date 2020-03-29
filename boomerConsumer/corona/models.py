@@ -5,6 +5,8 @@ from django.dispatch import receiver
 
 # Create your models here.
 
+
+
 class Boomer(models.Model):
     username = models.CharField(primary_key=True, max_length=50)
     password = models.CharField(max_length=100)

@@ -7,7 +7,7 @@ from django.views import generic
 from ..models import Boomer, Requests, Zoomer
 from django.db import connection
 from django.contrib.auth import authenticate
-from corona.forms import*
+
 from django.contrib.auth import login as loginDjango
 import datetime
 
@@ -17,40 +17,13 @@ def index(request):
 def login(request):
     return render(request, 'login/index.html',{})
 
-def signupB(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            Boomer = form.save()
-            Boomer.refresh_from_db()
-            Boomer.profile.displayName = form.cleaned_data.get('displayName')
-            Boomer.save()
-            Boomer.profile.lastName = form.cleaned_data.get('lastName')
-            Boomer.save()
-            Boomer.profile.age = form.cleaned_data.get('age')
-            Boomer.save()
-            Boomer.profile.email = form.cleaned_data.get('postalCode')
-            Boomer.save()
-            Boomer.profile.phome = form.cleaned_data.get('phoneNumber')
-            Boomer.save()
-            raw_password = form.cleaned_data.get('password1')
-            Boomer = authenticate(username=Boomer.username, password=raw_password)
-            login(request, Boomer)
-            return redirect('index')
-    else:
-        form = SignUpForm()
-    return render(request, 'login/boomer_signup.html',{'form': form})
 
 def signupZ(request):
     return render(request, 'login/zoomer_signup.html',{})
 
+def signupB(request):
+    return render(request, 'login/boomer_signup.html',{})
 
-
-    # Boomer.object.filter(pk="whatever they enter")
-
-    # def signup(request):
-    
-    # return render(request, 'signup.html', {'form': form})
 def boomerIndex(request):
     return render(request, 'homepage/boomerIndex.html',{})
 
@@ -60,6 +33,14 @@ def signupZoomerConfirm(request):
     newZoomer.save()
     request.session['username'] = request.POST['username']
     request.session['type'] = 'zoomer'
+    return index(request)
+
+def signupBoomerConfirm(request):
+    #find latitude and longitude using jacobs function
+    newBoomer= Boomer(username= request.POST['username'], password=request.POST['password'], name=request.POST['name'], surname=request.POST['surname'],age=request.POST['age'],email=request.POST['email'], postal_code=request.POST['postalcode'],phone=request.POST['phone'],address=request.POST['address'])
+    newBoomer.save()
+    request.session['username'] = request.POST['username']
+    request.session['type'] = 'boomer'
     return index(request)
 
 def loginSubmit(request):
