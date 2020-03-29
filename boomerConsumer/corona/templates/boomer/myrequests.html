@@ -1,44 +1,59 @@
 <html>
 
-<body>
+<body style="background: rgb(232,90,79);
+background: linear-gradient(229deg, rgba(232,90,79,1) 24%, rgba(220,20,60,1) 60%, rgba(234,231,220,1) 98%);">
     {% extends "main/baseboomer.html" %}
     {% block title %} Requests {% endblock %}
     {% block content %}
-    <div class="main">
+    <br>
+    <br>
+<section class="page-section" >
+    <!-- <div class="itemsInList" > -->
     {% if request_list %}
     {% for request1 in request_list %}
+    <div class="itemsInList" >
+    <center>
     <p>
-        Request: {{request1.details}}<br> 
+        <b>Request:</b> <br> {{request1.details}}<br> <br> 
         {%if request1.completed == False%}
-        In Progress...<br><br>
+        <b>Status:</b> &nbsp In Progress...
         {%else%}
         The request has been fulfilled<br><br>
         {%endif%}
         {% if request1.taken == True %}
-        Helper details:<br>
-        Name: {{request1.zoomer.name}} <br>
-        Surname: {{request1.zoomer.surname}}<br>
-        Age: {{request1.zoomer.age}} <br>
-        Distance: {{request1.distance}} km<br>
-        Address: {{request1.zoomer.address}}<br>
-        Postal Code: {{request1.zoomer.postal_code}}<br>
-        Email: {{request1.zoomer.email}}<br>
-        Phone: {{request1.zoomer.phone}}<br>
+        <br> <br>
+        <b>Helper details:</b><br>
+        <b>Name:</b> {{request1.zoomer.name}} <br>
+        <b>Surname:</b> {{request1.zoomer.surname}}<br>
+        <b>Age: </b> {{request1.zoomer.age}} <br>
+        <b>Distance: </b> {{request1.distance}} km<br>
+        <b>Address: </b>{{request1.zoomer.address}}<br>
+        <b>Postal Code: </b>{{request1.zoomer.postal_code}}<br>
+        <b>Email:</b> {{request1.zoomer.email}}<br>
+        <b>Phone: </b>{{request1.zoomer.phone}}<br>
         {%else%}
-        Not taken yet<br>
+         Not Taken Yet<br>
         {%endif%}
         {%if request1.completed == False%}
+        <center>
         <a href="{% url 'corona:editListing' request1.id %}">Edit request</a><br>
+        </center>
         {%endif%}
+        <center>
         <a href="{% url 'corona:deleteListing' request1.id %}">Delete request</a><br>
+        </center>
         <hr>
         
     </p>
     {% endfor %}   
     {% else %}
+    <div class="itemsInList" >
     <p>No Requests</p>
+    </center>
+    <div class="itemsInList" >
     {% endif %}
     </div>
+</section>
     {% endblock %}
 </body>
 
