@@ -4,6 +4,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
+from ..models import Boomer, Requests, Zoomer
 from django.db import connection
 from django.contrib.auth import authenticate
 from corona.forms import*
@@ -11,9 +12,6 @@ from django.contrib.auth import login as loginDjango
 import datetime
 
 def index(request):
-    #for now
-    request.session['username'] = 'mzhang'
-    request.session['type'] = 'zoomer'
     return render(request, 'homepage/index.html',{})
 
 def login(request):
@@ -44,18 +42,7 @@ def signupB(request):
     return render(request, 'login/boomer_signup.html',{'form': form})
 
 def signupZ(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            loginDjango(request, user)
-            return redirect('homepage/index2') # CHANGE TO WHATEVER THING NEEDED
-    else:
-        form = UserCreationForm()
-    return render(request, 'login/zoomer_signup.html',{'form': form})
+    return render(request, 'login/zoomer_signup.html',{})
 
 
 
@@ -65,7 +52,33 @@ def signupZ(request):
     
     # return render(request, 'signup.html', {'form': form})
 def boomerIndex(request):
-    # for now
-    request.session['username'] = 'gays'
-    request.session['type'] = 'boomer'
     return render(request, 'homepage/boomerIndex.html',{})
+
+def signupZoomerConfirm(request):
+    #find latitude and longitude using jacobs function
+    newZoomer= Zoomer(username= request.POST['username'], password=request.POST['password'], name=request.POST['name'], surname=request.POST['surname'],age=request.POST['age'],email=request.POST['email'], postal_code=request.POST['postalcode'],phone=request.POST['phone'],address=request.POST['address'])
+    newZoomer.save()
+    request.session['username'] = request.POST['username']
+    request.session['type'] = 'zoomer'
+    return index(request)
+
+def loginSubmit(request):
+    try:
+        b = Boomer.objects.get(pk=request.POST['username'])
+        if(b.password == request.POST['password']):
+            request.session['username'] = request.POST['username']
+            request.session['type'] = 'boomer'
+            return boomerIndex(request)
+        else:
+            return render(request, 'login/index.html',{'error_message':'Wrong password'})
+    except:
+        try:
+            z = Zoomer.objects.get(pk=request.POST['username'])
+            if(z.password == request.POST['password']):
+                request.session['username'] = request.POST['username']
+                request.session['type'] = 'zoomer'
+                return index(request)
+            else:
+                return render(request, 'login/index.html',{'error_message':'Wrong password'})
+        except:
+            return render(request, 'login/index.html',{'error_message':'User not registered. Sign up first'})

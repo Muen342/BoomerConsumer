@@ -31,7 +31,7 @@ def listing(request):
 
 def requestTake(request, id):
     request1 = Requests.objects.filter(id=id).first()
-    request1.zoomer_id = 'mzhang'
+    request1.zoomer_id = request.session['username']
     request1.taken = True
     request1.save()
     #save the zoomer that took it too, but we need the zoomer id in session storage to access (get during login)
