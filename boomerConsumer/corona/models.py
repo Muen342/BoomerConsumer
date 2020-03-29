@@ -13,6 +13,7 @@ class Boomer(models.Model):
     latitude = models.FloatField(default=0)
     longitude = models.FloatField(default=0)
     phone = models.CharField(max_length=11,default='')
+    address = models.CharField(max_length=100,default='')
 
 
 class Zoomer(models.Model):
@@ -26,6 +27,7 @@ class Zoomer(models.Model):
     latitude = models.FloatField(default=0)
     longitude = models.FloatField(default=0)
     phone = models.CharField(max_length=11,default='')
+    address = models.CharField(max_length=100,default='')
 
 class Requests(models.Model):
     boomer_id = models.ForeignKey(Boomer, on_delete=models.CASCADE)

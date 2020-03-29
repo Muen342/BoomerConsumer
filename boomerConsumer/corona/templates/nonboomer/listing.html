@@ -11,7 +11,10 @@
             Name: {{boomer.name}} <br>
             Surname: {{boomer.surname}}<br>
             Age: {{boomer.age}} <br>
-            Postal Code : {{boomer.postal_code}}<br>
+            Address: {{boomer.address}}<br>
+            Postal Code: {{boomer.postal_code}}<br>
+            Email: {{boomer.email}}<br>
+            Phone: {{boomer.phone}}<br>
             Requests:  <br>
             {% for request in boomer.request_list %}
             {%if request.taken == False%}
