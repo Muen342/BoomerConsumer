@@ -22,8 +22,16 @@ def listing(request):
     myboomer_list = []
     for boomer in boomer_list:
         request_list = Requests.objects.filter(boomer_id=boomer.username)
-        newBoomer = {'name':boomer.name, 'surname':boomer.surname, 'age':boomer.age, 'postal_code':boomer.postal_code, 'email':boomer.email, 'phone': boomer.phone, 'address':boomer.address, 'request_list': request_list}
-        myboomer_list.append(newBoomer)
+        reqcount = request_list.count()
+        taken= 0
+        for request1 in request_list:
+            if(request1.taken == True):
+                taken += 1
+        if(reqcount == taken):
+            myboomer_list.append(boomer)
+        else:
+            newBoomer = {'name':boomer.name, 'surname':boomer.surname, 'age':boomer.age, 'postal_code':boomer.postal_code, 'email':boomer.email, 'phone': boomer.phone, 'address':boomer.address, 'request_list': request_list}
+            myboomer_list.append(newBoomer)
     context = {
         'boomer_list': myboomer_list,
     }
@@ -73,3 +81,28 @@ def deleteListing(request, id):
     request1 = Requests.objects.get(pk=id)
     request1.delete()
     return show_requests(request)
+
+def accounts(request):
+    boomer=Boomer.objects.get(pk=request.session['username'])
+    context = {
+        'boomer': boomer,
+    }
+    return render(request, 'boomer/editAccount.html', context)
+
+def editBoomerConfirm(request):
+    boomer = Boomer.objects.get(pk=request.session['username'])
+    boomer.username=request.POST['username']
+    boomer.password=request.POST['password']
+    boomer.name=request.POST['name']
+    boomer.surname=request.POST['surname']
+    boomer.email=request.POST['email']
+    boomer.postal_code=request.POST['postalcode']
+    boomer.address=request.POST['address']
+    boomer.age=request.POST['age']
+    boomer.phone=request.POST['phone']
+    boomer.save()
+    context = {
+        'boomer': boomer,
+        'error_message':'Edit Successful'
+    }
+    return render(request, 'boomer/editAccount.html', context)
