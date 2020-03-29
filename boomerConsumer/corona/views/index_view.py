@@ -21,26 +21,28 @@ def login(request):
 
 def signupB(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = UserForm(request.POST, prefix='UF')
+
         if form.is_valid():
-            Boomer = form.save()
-            Boomer.refresh_from_db()
-            Boomer.profile.displayName = form.cleaned_data.get('displayName')
-            Boomer.save()
-            Boomer.profile.lastName = form.cleaned_data.get('lastName')
-            Boomer.save()
-            Boomer.profile.age = form.cleaned_data.get('age')
-            Boomer.save()
-            Boomer.profile.email = form.cleaned_data.get('postalCode')
-            Boomer.save()
-            Boomer.profile.phome = form.cleaned_data.get('phoneNumber')
-            Boomer.save()
+            user = form.save(commit=False)
+            user.refresh_from_db()
+            user.profile.displayName = form.cleaned_data.get('displayName')
+            user.save(commit=False)
+            user.profile.lastName = form.cleaned_data.get('lastName')
+            user.save(commit=False)
+            user.profile.age = form.cleaned_data.get('age')
+            user.save(commit=False)
+            user.profile.email = form.cleaned_data.get('email')
+            user.save(commit=False)
+            user.profile.phone = form.cleaned_data.get('phoneNumber')
+            user.save(commit=False)
+            user.profile.postalCode = form.cleaned_data.get('postalCode')
             raw_password = form.cleaned_data.get('password1')
-            Boomer = authenticate(username=Boomer.username, password=raw_password)
-            login(request, Boomer)
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
             return redirect('index')
     else:
-        form = SignUpForm()
+        form = UserForm()
     return render(request, 'login/boomer_signup.html',{'form': form})
 
 def signupZ(request):
