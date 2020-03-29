@@ -6,57 +6,173 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Boomer sign up</title>
+    <title>Boomer Sign Up</title>
     <!-- Bootstrap core CSS -->
-    <!-- Custom fonts for this template -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+<title>Bootstrap Simple Registration Form</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<style type="text/css">
+    body{
+        color: #E85A4F;
+        background: #EAE7DC;
+        font-family: 'Roboto', sans-serif;
+    }
+    .form-control{
+        height: 40px;
+        box-shadow: none;
+        color: #969fa4;
+    }
+    .form-control:focus{
+        border-color: #5cb85c;
+    }
+    .form-control, .btn{        
+        border-radius: 3px;
+    }
+    .signup-form{
+        width: 400px;
+        margin: 0 auto;
+        padding: 30px 0;
+    }
+    .signup-form h2{
+        color: #636363;
+        margin: 0 0 15px;
+        position: relative;
+        text-align: center;
+    }
+    .signup-form h2:before, .signup-form h2:after{
+        content: "";
+        height: 2px;
+        width: 70%;
+        background: crimson;
+        color: crimson;
+        position: absolute;
+        top: 110%;
+        z-index: 2;
+
+/*        content:"";
+        width:10px;
+        height:10px;
+        border-radius:50%;
+        background: #b83b3b;
+        display:inline-block;*/
+    }   
+    .signup-form h2:before{
+        left: -100px;
+    }
+    .signup-form h2:after{
+        right: -100px;
+    }
+    .signup-form .hint-text{
+        color: #999;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .signup-form form{
+        color: #8E8D8A;
+        border-radius: 3px;
+        margin-bottom: 15px;
+        background: #D8C3A5;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .signup-form .form-group{
+        margin-bottom: 20px;
+    }
+    .signup-form input[type="checkbox"]{
+        margin-top: 3px;
+    }
+    .signup-form .btn{        
+        font-size: 16px;
+        font-weight: bold;      
+        min-width: 140px;
+        outline: none !important;
+    }
+    .signup-form .row div:first-child{
+        padding-right: 10px;
+    }
+    .signup-form .row div:last-child{
+        padding-left: 10px;
+    }       
+    .signup-form a{
+        color: #fff;
+        text-decoration: underline;
+    }
+    .signup-form a:hover{
+        text-decoration: none;
+    }
+    .signup-form form a{
+        color: #5cb85c;
+        text-decoration: none;
+    }   
+    .signup-form form a:hover{
+        text-decoration: underline;
+    }  
+</style>
     <!-- Custom styles for this template -->
-    <link href="css/agency.min.css" rel="stylesheet">
+    <link href="templates/css/agency.min.css" rel="stylesheet">
     <!-- Favicon Tab Icon -->
     <!-- <link rel="shortcut icon" href="img/favicon.jpg"> -->
 </head>
 <body id="page-top">
     <section class="page-section" id="intro">
         <div class="container">
-            <center><h1>Sign up Boomer form here</h1></center>
-            <h3>Already registered Boomer or Zoomer?<a href="/corona"> Login here </a> </h3>
-            
+        <br>
+        <p>Already a member? Go to our <a href="/corona">Login Page</a></p>
+        <br>  
         </div>
     </section>
 
     <section class="page-section" id="Signup form">
+        <div class='signup-form'>
         {% block content %}
-          <center><h2>Ok Boomer sign up here</h2>
+        
+          <center>            
           <form action="{% url 'corona:signupBoomerConfirm' %}" method="post">
+            <h2> Ok Boomer Sign-up Here</h2>
+
             {% csrf_token %}
+            <div class="form-group">
             <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" value=""><br>
+            <input type="text" class="form-control" id="username" name="username" value=""><br>
+
             <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" value=""><br>
+            <input type="password" class="form-control" id="password" name="password" value=""><br>
+
             <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name" value=""><br>
+            <input type="text" class="form-control" id="name" name="name" value=""><br>
+
             <label for="surname">Surname:</label><br>
-            <input type="text" id="surname" name="surname" value=""><br>
+            <input type="text" class="form-control" id="surname" name="surname" value=""><br>
+
             <label for="age">Age:</label><br>
-            <input type="text" id="age" name="age" value=""><br>
+            <input type="text" class="form-control" id="age" name="age" value=""><br>
+
             <label for="phone">Phone:</label><br>
-            <input type="text" id="phone" name="phone" value=""><br>
+            <input type="text" class="form-control" id="phone" name="phone" value=""><br>
+
             <label for="email">Email:</label><br>
-            <input type="text" id="email" name="email" value=""><br>
+            <input type="text" class="form-control" id="email" name="email" value=""><br>
+
             <label for="address">Address:</label><br>
-            <input type="text" id="address" name="address" value=""><br>
+            <input type="text" class="form-control"  id="address" name="address" value=""><br>
+
             <label for="postalcode">Postal Code:</label><br>
-            <input type="text" id="postalcode" name="postalcode" value=""><br>
-            <input type="submit" value="Submit">
-          </form>
+            <input type="text" class="form-control" id="postalcode" name="postalcode" value=""><br><br>
+
+            <input type="submit" class="form-control" value="Submit">
+
           {% if error_message %}
           <p>{{error_message}}</p>
           {% endif %}
+
+                </div>
+          </form>
         {% endblock %}
+
         </center>
+    </div>
     </section>
 </body>
