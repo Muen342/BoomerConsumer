@@ -79,8 +79,8 @@ def parsePostal(postalCode):
     data = response.json()
     data = json.dumps(data)
     #print(data)
-    latitude = data.split('latt')[1].split('": "')[1].split('",')[0]
-    longitude = data.split('longt')[1].split('": "')[1].split('"}')[0]
+    longitude = data.split('longt')[1].split('": "')[1].split('",')[0]
+    latitude = data.split('latt')[1].split('": "')[1].split('"}')[0]
     #print('latitude: ' + latitude)
     #print('longitude: ' + longitude)
     return float(latitude), float(longitude)
@@ -102,15 +102,15 @@ def boomerIndex(request):
     return show_requests(request)
 
 def signupZoomerConfirm(request):
-    lat, longi  = parsePostal(request.POST['postalcode'])
-    newZoomer= Zoomer(username= request.POST['username'], password=request.POST['password'], name=request.POST['name'], surname=request.POST['surname'],age=request.POST['age'],email=request.POST['email'], postal_code=request.POST['postalcode'],phone=request.POST['phone'],address=request.POST['address'],latitude=lat,longitude=longi)
+    lat,longi  = parsePostal(request.POST['postalcode'])
+    newZoomer= Boomer(username= request.POST['username'], password=request.POST['password'], name=request.POST['name'], surname=request.POST['surname'],age=request.POST['age'],email=request.POST['email'], postal_code=request.POST['postalcode'],phone=request.POST['phone'],address=request.POST['address'],latitude=lat,longitude=longi)
     newZoomer.save()
     request.session['username'] = request.POST['username']
     request.session['type'] = 'zoomer'
     return index(request)
 
 def signupBoomerConfirm(request):
-    lat, longi  = parsePostal(request.POST['postalcode'])
+    lat,longi  = parsePostal(request.POST['postalcode'])
     newBoomer= Boomer(username= request.POST['username'], password=request.POST['password'], name=request.POST['name'], surname=request.POST['surname'],age=request.POST['age'],email=request.POST['email'], postal_code=request.POST['postalcode'],phone=request.POST['phone'],address=request.POST['address'],latitude=lat,longitude=longi)
     newBoomer.save()
     request.session['username'] = request.POST['username']
