@@ -8,38 +8,156 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>The Boomer Consumer</title>
-    <!-- Bootstrap core CSS -->
-    <!-- Custom fonts for this template -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+ <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+
+<title>Boomer Sign Up</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<style type="text/css">
+    body{
+        color: #E85A4F;
+        background: rgb(234,191,179);
+        background: radial-gradient(circle, rgba(234,191,179,1) 0%, rgba(233,128,116,1) 6%, rgba(234,231,220,1) 98%);
+        font-family: 'Poppins', sans-serif;
+    }
+    .form-control{
+        height: 40px;
+        box-shadow: none;
+        color: #969fa4;
+    }
+    .form-control:focus{
+        border-color: #5cb85c;
+    }
+    .form-control, .btn{        
+        border-radius: 3px;
+    }
+    .login-form{
+        width: 400px;
+        margin: 0 auto;
+        padding: 30px 0;
+    }
+    .login-form h2{
+        color: #636363;
+        margin: 0 0 15px;
+        position: relative;
+        text-align: center;
+    }
+    .login-form h2:before, .login-form h2:after{
+        content: "";
+        height: 2px;
+        width: 70%;
+        background: crimson;
+        color: crimson;
+        position: absolute;
+        top: 110%;
+        z-index: 2;
+
+/*        content:"";
+        width:10px;
+        height:10px;
+        border-radius:50%;
+        background: #b83b3b;
+        display:inline-block;*/
+    }   
+    .login-form h2:before{
+        left: -100px;
+    }
+    .login-form h2:after{
+        right: -100px;
+    }
+    .login-form .hint-text{
+        color: #999;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .login-form form{
+        color: #8E8D8A;
+        border-radius: 3px;
+        margin-bottom: 15px;
+        background: #D8C3A5;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form .form-group{
+        margin-bottom: 20px;
+    }
+    .login-form input[type="checkbox"]{
+        margin-top: 3px;
+    }
+    .login-form .btn{        
+        font-size: 16px;
+        font-weight: bold;      
+        min-width: 140px;
+        outline: none !important;
+    }
+    .login-form .row div:first-child{
+        padding-right: 10px;
+    }
+    .login-form .row div:last-child{
+        padding-left: 10px;
+    }       
+    .login-form a{
+        color: #fff;
+        text-decoration: underline;
+    }
+    .login-form a:hover{
+        text-decoration: none;
+    }
+    .login-form form a{
+        color: #5cb85c;
+        text-decoration: none;
+    }   
+    .login-form form a:hover{
+        text-decoration: underline;
+    }  
+
+    .site-footer {
+      background: orange;
+    }
+
+    #footer-content {
+      background: red;
+    }
+    .page-section {
+        color: green;
+        font-size: 18px;
+    }
+
+
+</style>
     <!-- Custom styles for this template -->
-    <link href="css/agency.min.css" rel="stylesheet">
+    <link href="templates/css/agency.min.css" rel="stylesheet">
     <!-- Favicon Tab Icon -->
     <!-- <link rel="shortcut icon" href="img/favicon.jpg"> -->
 </head>
 <body id="page-top">
     <section class="page-section" id="intro">
         <div class="container">
-            <h1>Login form here</h1>
+         <center> <br><h1>Login to your Boomer Consumer Profile</h1> <br> </center>
+         </div>
+    </section>
+
+    <section class="login-form">
             <form action="{% url 'corona:loginSubmit' %}" method="post">
             {% csrf_token %}
             <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" value=""><br>
+            <input type="text" id="username" class="form-control" name="username" value=""><br>
             <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" value=""><br>
-            <input type="submit" value="Submit">
-            </form>
+            <input type="password" class="form-control" id="password" name="password" value=""><br>
+            <input type="submit" class="form-control" value="Submit">
+            <br>
             {% if error_message %}
             <p>{{error_message}}</p>
             {% endif %}
+
+            </form>
             <h3>Not a registered Boomer or Zoomer? Signup <a href="#Signup link">below!</a> </h3>
             
-        </div>
+
     </section>
-    <section></section>
 
     <section class="page-section" id="Signup link">
         <div class="container">
