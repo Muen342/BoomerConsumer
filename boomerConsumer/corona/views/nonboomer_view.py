@@ -35,3 +35,27 @@ def requestComplete(request, id):
     request1.completed = True
     request1.save()
     return show_requests(request)
+
+def accounts(request):
+    zoomer=Zoomer.objects.get(pk=request.session['username'])
+    context = {
+        'zoomer': zoomer,
+    }
+    return render(request, 'nonboomer/editAccount.html', context)
+def editZoomerConfirm(request):
+    zoomer = Zoomer.objects.get(pk=request.session['username'])
+    zoomer.username=request.POST['username']
+    zoomer.password=request.POST['password']
+    zoomer.name=request.POST['name']
+    zoomer.surname=request.POST['surname']
+    zoomer.email=request.POST['email']
+    zoomer.postal_code=request.POST['postalcode']
+    zoomer.address=request.POST['address']
+    zoomer.age=request.POST['age']
+    zoomer.phone=request.POST['phone']
+    zoomer.save()
+    context = {
+        'zoomer': zoomer,
+        'error_message':'Edit Successful'
+    }
+    return render(request, 'nonboomer/editAccount.html', context)

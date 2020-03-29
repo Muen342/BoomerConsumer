@@ -5,7 +5,7 @@
     <form action="{% url 'corona:confirmEditListing' request1.id %}" method="post">
         {% csrf_token %}
         <label for="details">Details:</label><br>
-        <input type="text" id="details" name="details" value=""><br>
+        <input type="text" id="details" name="details" value="{{request1.details}}"><br>
         <input type="submit" value="Submit">
     </form>
     {% if error_message %}
