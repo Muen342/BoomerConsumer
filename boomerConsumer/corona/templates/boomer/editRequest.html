@@ -1,16 +1,24 @@
 {% extends "main/baseboomer.html" %}
 {% block content %}
-<div class="main">
-    <h2>Request</h2>
+<style type="text/css">
+    body{
+        background: rgb(232,90,79);
+        background: linear-gradient(308deg, rgba(232,90,79,1) 24%, rgba(220,20,60,1) 60%, rgba(234,231,220,1) 98%);"
+    }
+</style>
+<section class="page-section" >
+<div class="signup-form">
+    <h1>Request</h1>
+    <p> Write out a request of one specific thing for someone to see and go about trying to fulfil!</p>
     <form action="{% url 'corona:confirmEditListing' request1.id %}" method="post">
         {% csrf_token %}
         <label for="details">Details:</label><br>
-        <input type="text" id="details" name="details" value="{{request1.details}}"><br>
-        <input type="submit" value="Submit">
-    </form>
+        <input type="text" class="form-control" id="details" name="details" value="{{request1.details}}"><br>
+        <input type="submit" class="form-control" value="Submit">
     {% if error_message %}
     <p>{{error_message}}</p>
     {% endif %}
-    <br>
+    </form>
 </div>
+</section>
 {% endblock %}
